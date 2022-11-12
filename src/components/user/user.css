@@ -1,0 +1,151 @@
+.user{
+    flex: 4;
+    margin: 20px;
+}
+.smallWidget{
+    flex: 1;
+}
+.largeWidget{
+    flex: 2;
+}
+.smallWidget,
+.largeWidget{
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.top-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-container button{
+    background-color: rgb(6, 172, 122);
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.userTitle{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.userWrapper{
+    display: flex;
+}
+
+.userImg{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    object-position: top;
+}
+
+.top{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.smallWidgetText{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.smallWidgetText .title{
+    font-weight: 300;
+}
+.subTitle{
+    color: rgb(174, 174, 174);
+    font-size: 13px;
+}
+
+.infoList{
+    margin: 15px 0px;
+    padding: 0;
+    list-style: none;
+}
+
+.infoList li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.icon{
+    color: rgb(109 109 109);
+    margin-right: 15px;
+    font-size: 26px;
+}
+
+.info{
+    color: #525252;
+}
+
+/*******large wedgit*****/
+.largeWidget .smallHeading{
+    font-size: 25px;
+}
+
+.largeWedgitWrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.largeWedgitWrapper .form{
+    flex: 2;
+}
+.largeWedgitWrapper .additional{
+    flex: 1;
+}
+
+.userUpdateItem{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 15px 0px;
+}
+.userUpdateItem label{
+    color: #707070;
+}
+.userUpdateItem input{
+    padding: 6px 0px;
+    border: none;
+    border-bottom: 1px solid #dadada;
+}
+
+.userUpdateItem input:focus{
+    outline: none;
+}
+
+.additional{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.bigAvatar{
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.update{
+    background-color: darkblue;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 7px;
+    cursor: pointer;
+}

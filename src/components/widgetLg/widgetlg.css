@@ -1,0 +1,51 @@
+.lgWidget{
+    flex: 2;
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+}
+.lgWidgetImg{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lgWidgetTitle{
+    margin-bottom: 20px;
+}
+.lgWidgetButton{
+    padding: 5px 7px;
+    border-radius: 10px;
+    border: none;
+}
+.lgWidgetButton.Approved{
+    background-color: #e5faf2;
+    color: #3bb077;
+}
+.lgWidgetButton.Declined{
+    background-color: #fff0f1;
+    color: #d95087;
+}
+.lgWidgetButton.Pending{
+    background-color: #ebf1fe;
+    color: #2a7ade;
+}
+.lgWidgetTable{
+    width: 100%;
+    border-spacing: 20px;
+}
+.lgWidgetTh{
+    text-align: left;
+}
+
+.lgWidgetUser{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.lgWidgetDate,
+.lgWidgetAmount
+{
+    font-weight: 300;
+}

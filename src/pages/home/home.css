@@ -1,0 +1,48 @@
+.home{
+    flex: 4;
+    padding: 20px 0px;
+}
+.homeWidgets{
+    display: flex;
+    margin: 20px;
+}
+
+@media(max-width:767px){
+    .home{
+        width: calc(100vw - 60px);
+    }
+    .homeWidgets {
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0px;
+    }
+    .featuredItem {
+        flex: 1 1;
+        margin: 0px 0px;
+    }
+    .chart {
+        margin: 0px;
+    }
+    .featured {
+        grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    .smWidget{
+        padding: 15px;
+        margin-right: 0px;
+    }
+    .userWrapper {
+        flex-direction: column;
+    }
+    .largeWedgitWrapper {
+        flex-direction: column;
+    }
+    .lgWidget{
+        overflow: scroll;
+    }
+    .smWidget {
+        padding: 12px;
+    }
+
+}
