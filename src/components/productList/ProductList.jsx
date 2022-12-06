@@ -1,5 +1,5 @@
 import "./productList.css";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <div className="productListItem">
-            <img className="productListImg" src={params.row.avatar} alt="" />
+            <img className="productListImg" src={params.row.mainImage} alt="" />
             {params.row.name}
           </div>
         );

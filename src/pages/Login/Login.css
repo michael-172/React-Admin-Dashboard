@@ -1,0 +1,27 @@
+.LoginForm {
+  height: 100vh;
+}
+
+.LoginForm .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LoginForm .container form {
+  width: 60%;
+  max-width: 500px;
+  border: 1px solid #afafaf;
+  padding: 30px 15px;
+  border-radius: 11px;
+}
+
+.LoginForm .container form input[type="submit"] {
+  width: 100%;
+}
+
+.forgetPass {
+  color: #afafaf;
+  text-decoration: underline;
+}
