@@ -23,6 +23,8 @@ import Reg from "./pages/Registeration/Reg";
 import CreateWork from "./pages/CreateWork/CreateWork";
 import AddBlog from "./pages/AddBlog/AddBlog";
 import { useDispatch } from "react-redux";
+import WorkDetails from "./pages/WorkDetails/WorkDetails";
+import ClientDetails from "./pages/Client Details/ClientDetails";
 
 function App() {
   return (
@@ -37,9 +39,11 @@ function App() {
         <Route path="/Services/:id" element={<EditServices />} />
         <Route path="/CreateService" element={<CreateService />} />
         <Route path="/Clients" element={<Clients />} />
+        <Route path="/Clients/:id" element={<ClientDetails />} />
         <Route path="/CreateClient" element={<CreateClient />} />
         <Route path="/Sections" element={<Sections />} />
         <Route path="/Work" element={<Work />} />
+        <Route path="/Work/:id" element={<WorkDetails />} />
         <Route path="/About" element={<About />} />
         <Route path="/Blogs" element={<Blogs />} />
         <Route path="/AddBlog" element={<AddBlog />} />

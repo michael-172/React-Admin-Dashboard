@@ -62,7 +62,7 @@ export default function Topbar() {
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             >
-              <span>
+              <span className="WelcomeMsg">
                 Welcome <b>{user?.userName}</b> (
                 {user.role ? user.role : "Test"})
               </span>

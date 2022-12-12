@@ -3,10 +3,12 @@ import axios from "axios";
 
 export const getWork = createAsyncThunk(
   "work/getAllWork",
-  async (_, thunkAPI) => {
+  async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch(`http://abnuur-001-site1.btempurl.com/api/Work`);
+      const res = id
+        ? await fetch(`http://abnuur-001-site1.btempurl.com/api/Work/${id}`)
+        : await fetch(`http://abnuur-001-site1.btempurl.com/api/Work`);
       const data = await res.json();
       return data;
     } catch (error) {

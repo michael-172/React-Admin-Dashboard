@@ -6,9 +6,9 @@ export const getClients = createAsyncThunk(
   async (id, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch(
-        `http://abnuur-001-site1.btempurl.com/api/Clients`
-      );
+      const res = id
+        ? await fetch(`http://abnuur-001-site1.btempurl.com/api/Clients/${id}`)
+        : await fetch(`http://abnuur-001-site1.btempurl.com/api/Clients`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -16,8 +16,6 @@ export const getClients = createAsyncThunk(
     }
   }
 );
-
-
 
 export const getOneClient = createAsyncThunk(
   "clients/getOneClient",
@@ -34,9 +32,6 @@ export const getOneClient = createAsyncThunk(
     }
   }
 );
-
-
-
 
 export const addClients = createAsyncThunk(
   "clients/addClient",

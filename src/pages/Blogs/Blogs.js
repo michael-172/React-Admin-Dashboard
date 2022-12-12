@@ -26,6 +26,10 @@ const Services = () => {
   const { blogs } = useSelector((state) => state);
   const Blogs = blogs.Blogs;
 
+  const getServiceFunction = (id) => {
+    dispatch(getServices(id));
+  };
+
   const handleDelete = (serviceFromParam) => {
     Swal.fire({
       title: `Do you want to Delete this Blog ?`,
@@ -48,32 +52,19 @@ const Services = () => {
     { field: "blogId", headerName: "ID", width: 90 },
 
     { field: "title", headerName: "Blog Title", width: 200 },
+    { field: "createdAt", headerName: "Blog Creation Date", width: 200 },
+    { field: "serviceId", headerName: "Realted Service", width: 200 },
 
-    // {
-    //   field: "Blog Describtion",
-    //   headerName: "Blog Describtion",
-    //   width: 150,
-    //   renderCell: (params) => {
-    //     return params?.row?.blogSubTiitles?.map((el) => (
-    //       <p>{el.description}</p>
-    //     ));
-    //   },
-    // },
-
-    // {
-    //   field: "action",
-    //   headerName: "Actions",
-    //   width: 150,
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         {params?.row?.blogSubTiitles?.map((el) => (
-    //           <p>{el.description}</p>
-    //         ))}
-    //       </>
-    //     );
-    //   },
-    // },
+    {
+      field: "Blog Describtion",
+      headerName: "Blog Describtion",
+      width: 150,
+      renderCell: (params) => {
+        return params?.row?.blogSubTiitles?.map((el) => (
+          <p>{el.description}</p>
+        ));
+      },
+    },
   ];
 
   return (

@@ -85,6 +85,7 @@ export default function Chart({ title, data, dataKey, grid }) {
       <h3 className="chartTitle">Our Clients</h3>
 
       <DataGrid
+        className="clientsTable"
         rows={clients}
         getRowId={(row) => row.clientId}
         disableSelectionOnClick
@@ -92,7 +93,9 @@ export default function Chart({ title, data, dataKey, grid }) {
         pageSize={10}
         rowsPerPageOptions={[10]}
         checkboxSelection
-        sx={{ height: "500px" }}
+        sx={{
+          height: "500px",
+        }}
       />
     </div>
   );

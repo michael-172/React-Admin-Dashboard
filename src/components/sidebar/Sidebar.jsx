@@ -56,7 +56,7 @@ export default function Sidebar() {
               <Link to="/Add_User" className="link">
                 <li className="sidebarListItem">
                   <GroupAddIcon className="sidebarIcon" />
-                  <span className="text">Add user (Data Entry)</span>
+                  <span className="text">Add user </span>
                 </li>
               </Link>
             )}

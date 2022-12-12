@@ -1,5 +1,16 @@
-.chart{
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+.chart {
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.clientsTable::-webkit-scrollbar {
+  width: 20px;
+}
+.clientsTable::-webkit-scrollbar-track {
+  background-color: "orange";
+}
+.clientsTable::-webkit-scrollbar-thumb {
+  background-color: "red";
+  border-radius: 2;
 }
