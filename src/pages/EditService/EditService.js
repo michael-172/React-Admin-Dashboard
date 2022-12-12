@@ -5,13 +5,20 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocationSearchingOutlinedIcon from "@mui/icons-material/LocationSearchingOutlined";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getServices } from "../../store/servicesSlice";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const Editservices = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!window.localStorage.getItem("token")) {
+      navigate("/Login");
+    }
+  });
+
   const params = useParams();
 
   const dispatch = useDispatch();

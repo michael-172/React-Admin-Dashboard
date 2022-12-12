@@ -7,7 +7,7 @@ export const getClients = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await fetch(
-        `http://freejob-001-site1.atempurl.com/api/Clients`
+        `http://abnuur-001-site1.btempurl.com/api/Clients`
       );
       const data = await res.json();
       return data;
@@ -17,13 +17,34 @@ export const getClients = createAsyncThunk(
   }
 );
 
+
+
+export const getOneClient = createAsyncThunk(
+  "clients/getOneClient",
+  async (id, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const res = await fetch(
+        `http://abnuur-001-site1.btempurl.com/api/Clients/${id}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+
+
 export const addClients = createAsyncThunk(
   "clients/addClient",
   async (formData, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await fetch(
-        "http://freejob-001-site1.atempurl.com/api/Clients",
+        "http://abnuur-001-site1.btempurl.com/api/Clients",
         {
           method: "POST",
           body: formData,
@@ -44,7 +65,7 @@ export const deleteClient = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       await fetch(
-        `http://freejob-001-site1.atempurl.com/api/Clients/${client.clientId}`,
+        `http://abnuur-001-site1.btempurl.com/api/Clients/${client.clientId}`,
         {
           method: "DELETE",
           headers: {
@@ -61,7 +82,7 @@ export const deleteClient = createAsyncThunk(
 
 const clientsSlice = createSlice({
   name: "users",
-  initialState: { clients: [], isLoading: null },
+  initialState: { clients: [], isLoading: null, client: [] },
   extraReducers: {
     //get Services
     [getClients.pending]: (state, action) => {
@@ -72,6 +93,10 @@ const clientsSlice = createSlice({
     },
     [getClients.rejected]: (state, action) => {
       state.isLoading = false;
+    },
+    //get one Client using id
+    [getOneClient.rejected]: (state, action) => {
+      state.client = action.payload;
     },
 
     // Delete

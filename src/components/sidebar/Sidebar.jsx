@@ -13,10 +13,25 @@ import {
   WorkOutline,
   Report,
 } from "@mui/icons-material";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
+import AddHomeWorkIcon from "@mui/icons-material/AddHomeWork";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setuser } from "../../store/userSlice";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) {
+      dispatch(setuser());
+    }
+  });
+  const { user } = useSelector((state) => state);
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -37,12 +52,14 @@ export default function Sidebar() {
               </li>
             </Link>
 
-            <Link to="/Sections" className="link">
-              <li className="sidebarListItem">
-                <TrendingUp className="sidebarIcon" />
-                <span className="text">Sections</span>
-              </li>
-            </Link>
+            {user.role === "SuperAdmin" && (
+              <Link to="/Add_User" className="link">
+                <li className="sidebarListItem">
+                  <GroupAddIcon className="sidebarIcon" />
+                  <span className="text">Add user (Data Entry)</span>
+                </li>
+              </Link>
+            )}
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -61,56 +78,49 @@ export default function Sidebar() {
                 <span className="text">Clients</span>
               </li>
             </Link>
-
+            {/* 
             <Link to="/About" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 <span className="text">About</span>
               </li>
-            </Link>
+            </Link> */}
 
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              <span className="text">Transactions</span>
-            </li>
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-              <span className="text">Reports</span>
-            </li>
+            <Link to="/Blogs" className="link">
+              <li className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                <span className="text">Blogs</span>
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
+          <h3 className="sidebarTitle">More Tools</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              <span className="text">Mail</span>
-            </li>
-            <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              <span className="text">Feedback</span>
-            </li>
-            <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
-              <span className="text">Messages</span>
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <WorkOutline className="sidebarIcon" />
-              <span className="text">Manage</span>
-            </li>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              <span className="text">Analytics</span>
-            </li>
-            <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
-              <span className="text">Reports</span>
-            </li>
+            <Link to="/CreateService" className="link">
+              <li className="sidebarListItem">
+                <DesignServicesIcon className="sidebarIcon" />
+                <span className="text">Add Service</span>
+              </li>
+            </Link>
+            <Link to="/CreateClient" className="link">
+              <li className="sidebarListItem">
+                <DomainAddIcon className="sidebarIcon" />
+                <span className="text">Add Client</span>
+              </li>
+            </Link>
+            <Link to="/CreateClient" className="link">
+              <li className="sidebarListItem">
+                <AddHomeWorkIcon className="sidebarIcon" />
+                <span className="text">Add Work</span>
+              </li>
+            </Link>
+            <Link to="/AddBlog" className="link">
+              <li className="sidebarListItem">
+                <AutoStoriesIcon className="sidebarIcon" />
+                <span className="text">Add Blog</span>
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

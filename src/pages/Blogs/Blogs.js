@@ -1,24 +1,34 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteOutline, DeleteOutlined } from "@mui/icons-material";
 import { useEffect } from "react";
 import { deleteService, getServices } from "../../store/servicesSlice";
-import { productRows } from "../../dummyData";
 import Swal from "sweetalert2";
+import Topbar from "../../components/topbar/Topbar";
+import Sidebar from "../../components/sidebar/Sidebar";
+import { getBlogs } from "../../store/blogsSlics";
 
 const Services = () => {
-  const [data, setData] = useState(productRows);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!window.localStorage.getItem("token")) {
+      navigate("/Login");
+    }
+  });
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getServices());
+    dispatch(getBlogs());
   }, [dispatch]);
+
+  const { blogs } = useSelector((state) => state);
+  const Blogs = blogs.Blogs;
 
   const handleDelete = (serviceFromParam) => {
     Swal.fire({
-      title: `Do you want to Delete this service <b> ${serviceFromParam.name} </b> ?`,
+      title: `Do you want to Delete this Blog ?`,
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Delete",
@@ -34,67 +44,63 @@ const Services = () => {
     });
   };
 
-  const { services } = useSelector((state) => state.services);
-
   const columns = [
-    { field: "servieId", headerName: "ID", width: 90 },
-    {
-      field: "Service",
-      headerName: "Service",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.mainImage} alt="" />
-            {params.row.name}
-          </div>
-        );
-      },
-    },
-    { field: "name", headerName: "Name", width: 200 },
-    { field: "description", headerName: "Description", width: "400" },
+    { field: "blogId", headerName: "ID", width: 90 },
 
-    {
-      field: "action",
-      headerName: "Actions",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/Services/" + params.row.servieId}>
-              <button
-                className="userListEdit"
-                // onClick={() => {
-                //   dispatch(getUser(params.row));
-                // }}
-              >
-                Edit
-              </button>
-            </Link>
-            <DeleteOutlined
-              className="userListDelete"
-              onClick={() => {
-                handleDelete(params.row);
-              }}
-            />
-          </>
-        );
-      },
-    },
+    { field: "title", headerName: "Blog Title", width: 200 },
+
+    // {
+    //   field: "Blog Describtion",
+    //   headerName: "Blog Describtion",
+    //   width: 150,
+    //   renderCell: (params) => {
+    //     return params?.row?.blogSubTiitles?.map((el) => (
+    //       <p>{el.description}</p>
+    //     ));
+    //   },
+    // },
+
+    // {
+    //   field: "action",
+    //   headerName: "Actions",
+    //   width: 150,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         {params?.row?.blogSubTiitles?.map((el) => (
+    //           <p>{el.description}</p>
+    //         ))}
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   return (
-    <div className="userList">
-      <DataGrid
-        rows={services}
-        getRowId={(row) => row.servieId}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-      />
-    </div>
+    <>
+      <Topbar />
+      <div style={{ display: "flex" }}>
+        <Sidebar />
+        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <div className="userList">
+            <DataGrid
+              rows={Blogs}
+              getRowId={(row) => row.blogId}
+              disableSelectionOnClick
+              columns={columns}
+              pageSize={15}
+              rowsPerPageOptions={[10]}
+              checkboxSelection
+            />
+          </div>
+          <Link to="/AddBlog">
+            <button className="btn btn-primary" style={{ margin: "15px 0px" }}>
+              Add New Blog
+            </button>
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 

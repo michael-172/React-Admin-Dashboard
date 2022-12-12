@@ -1,21 +1,99 @@
 import "./chart.css";
-import { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { deleteClient, getClients } from "../../store/ClientsSlice";
+import { Link } from "react-router-dom";
+import { DeleteOutline, DeleteOutlined } from "@mui/icons-material";
+import { DataGrid } from "@mui/x-data-grid";
+import Swal from "sweetalert2";
 
+export default function Chart({ title, data, dataKey, grid }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getClients());
+  }, [dispatch]);
 
-export default function Chart({title, data, dataKey, grid}) {
+  const handleDelete = (serviceFromParam) => {
+    Swal.fire({
+      title: `Do you want to Delete this service <b> ${serviceFromParam.clientId} </b> ?`,
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      denyButtonText: `Don't Delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "", "success");
+        dispatch(deleteClient(serviceFromParam));
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
 
-    return (
+  const { clients } = useSelector((state) => state.clients);
+
+  const columns = [
+    { field: "clientId", headerName: "ID", width: "40" },
+    { field: "name", headerName: "Client Name", width: "400" },
+    { field: "logo", headerName: "Description", width: "400" },
+
+    {
+      field: "Client Image",
+      headerName: "Client Image",
+      width: "100",
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            <img className="userListImg" src={params.row.description} alt="" />
+          </div>
+        );
+      },
+    },
+
+    {
+      field: "action",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={"/Clients/" + params.row.clientId}>
+              <button
+                className="userListEdit"
+                // onClick={() => {
+                //   dispatch(getUser(params.row));
+                // }}
+              >
+                Edit
+              </button>
+            </Link>
+            <DeleteOutlined
+              className="userListDelete"
+              onClick={() => {
+                handleDelete(params.row);
+              }}
+            />
+          </>
+        );
+      },
+    },
+  ];
+
+  return (
     <div className="chart">
-        <h3 className="chartTitle">{title}</h3>
-    
-        <ResponsiveContainer width="100%" aspect={4 / 1}>
-            <LineChart data={data}>
-                <XAxis dataKey="name" stroke="#5550bd"/>
-                <Line type="monotone" dataKey={dataKey} stroke="#5550bd"/>
-                <Tooltip/>
-                {grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5"/>}
-            </LineChart>
-        </ResponsiveContainer>
+      <h3 className="chartTitle">Our Clients</h3>
+
+      <DataGrid
+        rows={clients}
+        getRowId={(row) => row.clientId}
+        disableSelectionOnClick
+        columns={columns}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        checkboxSelection
+        sx={{ height: "500px" }}
+      />
     </div>
-    )
+  );
 }

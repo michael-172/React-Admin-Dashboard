@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { DeleteOutline, DeleteOutlined } from "@mui/icons-material";
 import { useEffect } from "react";
@@ -11,6 +11,13 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 const Services = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!window.localStorage.getItem("token")) {
+      navigate("/Login");
+    }
+  });
+
   const [data, setData] = useState(productRows);
 
   const dispatch = useDispatch();
@@ -90,16 +97,23 @@ const Services = () => {
       <Topbar />
       <div style={{ display: "flex" }}>
         <Sidebar />
-        <div className="userList">
-          <DataGrid
-            rows={services}
-            getRowId={(row) => row.servieId}
-            disableSelectionOnClick
-            columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
-            checkboxSelection
-          />
+        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <div className="userList">
+            <DataGrid
+              rows={services}
+              getRowId={(row) => row.servieId}
+              disableSelectionOnClick
+              columns={columns}
+              pageSize={10}
+              rowsPerPageOptions={[10]}
+              checkboxSelection
+            />
+          </div>
+          <Link to="/CreateService">
+            <button className="btn btn-primary" style={{ margin: "15px 0px" }}>
+              Add New Service
+            </button>
+          </Link>
         </div>
       </div>
     </>

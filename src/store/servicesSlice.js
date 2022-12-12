@@ -8,9 +8,9 @@ export const getServices = createAsyncThunk(
     try {
       const res = id
         ? await fetch(
-            `http://freejob-001-site1.atempurl.com/api/Services/${id}`
+            `http://abnuur-001-site1.btempurl.com/api/Services/${id}`
           )
-        : await fetch(`http://freejob-001-site1.atempurl.com/api/Services`);
+        : await fetch(`http://abnuur-001-site1.btempurl.com/api/Services`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -25,7 +25,7 @@ export const addService = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await fetch(
-        "http://freejob-001-site1.atempurl.com/api/Services",
+        "http://abnuur-001-site1.btempurl.com/api/Services",
         {
           method: "POST",
           body: formData,
@@ -43,7 +43,7 @@ export const deleteService = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       await fetch(
-        `http://freejob-001-site1.atempurl.com/api/Services/${service.servieId}`,
+        `http://abnuur-001-site1.btempurl.com/api/Services/${service.servieId}`,
         {
           method: "DELETE",
           headers: {

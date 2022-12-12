@@ -7,7 +7,7 @@ export const addAbout = createAsyncThunk(
 
     try {
       const res = await fetch(
-        "http://freejob-001-site1.atempurl.com/api/AboutUs",
+        "http://abnuur-001-site1.btempurl.com/api/AboutUs",
         {
           method: "POST",
           body: JSON.stringify(aboutData),
@@ -30,7 +30,7 @@ export const getAbout = createAsyncThunk(
     const { rejectWithValue, getState } = thunkAPI;
     try {
       const res = await fetch(
-        `http://freejob-001-site1.atempurl.com/api/AboutUs/${type}`
+        `http://abnuur-001-site1.btempurl.com/api/AboutUs/${type}`
       );
       const data = await res.json();
       return data;

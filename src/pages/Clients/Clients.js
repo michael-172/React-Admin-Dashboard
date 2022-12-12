@@ -19,6 +19,8 @@ const Clients = () => {
     dispatch(getClients());
   }, [dispatch]);
 
+  const { clients } = useSelector((state) => state.clients);
+
   const handleDelete = (serviceFromParam) => {
     Swal.fire({
       title: `Do you want to Delete this service <b> ${serviceFromParam.clientId} </b> ?`,
@@ -37,12 +39,24 @@ const Clients = () => {
     });
   };
 
-  const { clients } = useSelector((state) => state.clients);
-  console.log(clients);
-
   const columns = [
     { field: "clientId", headerName: "ID", width: "40" },
-    { field: "description", headerName: "Description", width: "400" },
+    { field: "name", headerName: "Client Name", width: "400" },
+    { field: "logo", headerName: "Description", width: "400" },
+
+    {
+      field: "Client Image",
+      headerName: "Client Image",
+      width: "100",
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            <img className="userListImg" src={params.row.description} alt="" />
+            
+          </div>
+        );
+      },
+    },
 
     {
       field: "action",
@@ -79,8 +93,7 @@ const Clients = () => {
       <div style={{ display: "flex" }}>
         <Sidebar />
         <div
-          className="Test"
-          style={{ width: "100%", display: "flex", flexDirection: "column" }}
+          style={{ flex: 1, display: "flex", flexDirection: "column" }}
         >
           <div className="userList">
             <DataGrid

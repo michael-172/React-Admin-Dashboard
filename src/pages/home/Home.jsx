@@ -6,8 +6,16 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import "./home.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!window.localStorage.getItem("token")) {
+      navigate("/Login");
+    }
+  });
   return (
     <>
       <Topbar />
